@@ -1,26 +1,50 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 
+function Input(props) {
+	return (
+		<input
+			className="form-control"
+			placeholder="Philadelphia, PA" 
+			onChange={props.onUpdateLocation}
+			value={props.location}
+			type="text" />
+	)
+}
+
+function Button(props) {
+	return (
+		<button 
+			className="btn btn-success" 
+			style={{margin: 10}}
+			onClick={props.onSubmitLocation}>
+			{props.children}
+		</button>
+	)
+}
+
+function getStyles (props) {
+	return {
+		display: 'flex',
+		flexDirection: props.direction || 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+		maxWidth: 300,
+		alignSelf: 'right'
+	}
+}
+
 function Prompt(props) {
 	return (
-		<div>
-			<form onSubmit={props.onSubmitLocation}>
-				<div className="form-group">
-					<input
-					placeholder="Philadelphia, PA" 
-					onChange={props.onUpdateLocation}
-					value={props.location}
-					type="text" />
-				</div>
-				<div>
-					<button type="submit">Get Weather</button>
-				</div>
-			</form>
+		<div style={getStyles(props)}>
+			<Input />
+			<Button onSubmitLocation={props.onSubmitLocation}> Get Weather </Button>
 		</div>
 	)
 }
 
 Prompt.propTypes = {
+	direction: PropTypes.string,
 	onUpdateLocation: PropTypes.func.isRequired,
 	onSubmitLocation: PropTypes.func.isRequired,
 	location: PropTypes.string.isRequired

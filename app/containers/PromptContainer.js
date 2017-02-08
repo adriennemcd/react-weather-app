@@ -1,11 +1,22 @@
 var React = require('react');
+var PropTypes = React.PropTypes;
 var Prompt = require('../components/Prompt');
 
 var PromptContainer = React.createClass({
 	contextTypes: {
 		router: React.PropTypes.object.isRequired
 	},
-	
+
+	getDefaultProps: function () {
+		return {
+			direction: 'column'
+		}
+	},
+
+	propTypes: {
+		direction: PropTypes.string
+	},
+
 	getInitialState: function() {
 		return {
 			location: ''
@@ -19,7 +30,6 @@ var PromptContainer = React.createClass({
 	},
 
 	handleSubmitLocation: function(e) {
-		e.preventDefault();
 		var location = this.state.location;
 		this.setState({
 			location: ''
@@ -31,6 +41,7 @@ var PromptContainer = React.createClass({
 	render: function() {
 		return (
 			<Prompt 
+				direction={this.props.direction}
 				onSubmitLocation={this.handleSubmitLocation}
 				onUpdateLocation={this.handleUpdateLocation} 
 				location={this.state.location} />
