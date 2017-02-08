@@ -37,7 +37,9 @@ function getStyles (props) {
 function Prompt(props) {
 	return (
 		<div style={getStyles(props)}>
-			<Input />
+			<Input 
+				onUpdateLocation={props.onUpdateLocation}
+        		location={props.location}/>
 			<Button onSubmitLocation={props.onSubmitLocation}> Get Weather </Button>
 		</div>
 	)
