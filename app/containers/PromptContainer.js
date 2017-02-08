@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var Prompt = require('../components/Prompt');
+var api = require('../helpers/api');
 
 var PromptContainer = React.createClass({
 	contextTypes: {
@@ -36,6 +37,8 @@ var PromptContainer = React.createClass({
 			location: ''
 		});
 
+		// var weather = api.getCurrentWeather(location);
+		// console.log(weather);
 		this.context.router.push('/forecast/' + this.state.location)
 	},
 
