@@ -37,8 +37,6 @@ var PromptContainer = React.createClass({
 			location: ''
 		});
 
-		// var weather = api.getCurrentWeather(location);
-		// console.log(weather);
 		this.context.router.push('/forecast/' + this.state.location)
 	},
 

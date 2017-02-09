@@ -1,5 +1,6 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var Link = require('react-router').Link;
 var utils = require('../helpers/utils');
 var getDate = utils.getDate;
 var Loading = require('./Loading');
@@ -35,11 +36,12 @@ var styles = {
 function DayItem (props) {
   var date = getDate(props.day.dt);
   var icon = props.day.weather[0].icon;
+  console.log(props.city);
   return (
-    <a style={styles.dayItem} href="/">
+    <Link to={'/detail/' + props.city} style={styles.dayItem}>
       <img src={'./app/images/weather-icons/' + icon + '.svg'} alt='Weather' style={styles.image}/>
       <h2 style={styles.title}>{date}</h2>
-    </a>
+    </Link>
   )
 }
 
@@ -55,7 +57,7 @@ function ForecastUI(props) {
 			<h1>{props.location}</h1>
 			<div style={styles.days}>
 				{data.map(function (listItem) {
-		          return <DayItem key={listItem.dt} day={listItem} />
+		          return <DayItem key={listItem.dt} day={listItem} city={props.location} />
 		        })}
 			</div>
 		</div>
