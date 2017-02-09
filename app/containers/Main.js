@@ -21,7 +21,7 @@ var Main = React.createClass({
     return (
 		<div className='main-container' style={styles.container}>
 			<header style={styles.header}>
-        <h2>This is the header</h2>
+        <h2>Check the Weather</h2>
 				<PromptContainer direction='row' />
 			</header>
 			{this.props.children}

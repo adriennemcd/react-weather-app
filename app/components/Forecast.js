@@ -30,23 +30,27 @@ var styles = {
 
 	title: {
 		fontSize: '22px'
+	},
+
+	prompt: {
+		fontSize: '20px'
 	}
 }
 
 function DayItem (props) {
   var date = getDate(props.day.dt);
   var icon = props.day.weather[0].icon;
-  console.log(props.city);
+
   return (
-    <Link to={'/detail/' + props.city} style={styles.dayItem}>
+    <div style={styles.dayItem} onClick={props.handleClick}>
       <img src={'./app/images/weather-icons/' + icon + '.svg'} alt='Weather' style={styles.image}/>
       <h2 style={styles.title}>{date}</h2>
-    </Link>
+    </div>
   )
 }
 
 function ForecastUI(props) {
-	// the API returns 'list' with either an uppercase or lowercase 'l'
+	// the API returns 'list' with either an uppercase or lowercase 'l' why??
 	var data = {}
 	props.forecast.data.list === undefined
 	? data = props.forecast.data.List
@@ -55,9 +59,10 @@ function ForecastUI(props) {
 	return (
 		<div style={styles.container}>
 			<h1>{props.location}</h1>
+			<p style={styles.prompt}>Select a day for details</p>
 			<div style={styles.days}>
 				{data.map(function (listItem) {
-		          return <DayItem key={listItem.dt} day={listItem} city={props.location} />
+		          return <DayItem key={listItem.dt} day={listItem} city={props.location} handleClick={props.handleClick.bind(null, listItem)} />
 		        })}
 			</div>
 		</div>
@@ -67,12 +72,13 @@ function ForecastUI(props) {
 function Forecast(props) {
 	return props.isLoading === true
 	? <Loading />
-	: <ForecastUI location={props.location} forecast={props.forecast} />
+	: <ForecastUI location={props.location} forecast={props.forecast} handleClick={props.handleClick} />
 }
 
 Forecast.propTypes = {
 	location: PropTypes.string.isRequired,
 	isLoading: PropTypes.bool.isRequired,
+	handleClick: PropTypes.func.isRequired,
 	forecast: PropTypes.object.isRequired
 }
 

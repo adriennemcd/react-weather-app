@@ -5,7 +5,7 @@ function Input(props) {
 	return (
 		<input
 			className="form-control"
-			placeholder="Philadelphia, PA" 
+			placeholder="City, State" 
 			onChange={props.onUpdateLocation}
 			value={props.location}
 			type="text" />
